@@ -11,8 +11,7 @@ namespace Prova.MarQ.Infra.Loader.Employee_Loader
 {
     public class EmployeeLoader : BaseLoader, IEmployeeLoader
     {
-        private readonly ProvaMarqDbContext _context;
-        private Task<Company>? Employee;
+        private readonly ProvaMarqDbContext _context; 
         public EmployeeLoader(ProvaMarqDbContext context) : base(context)
         {
             _context = context;
@@ -20,6 +19,7 @@ namespace Prova.MarQ.Infra.Loader.Employee_Loader
         public async Task AddEmployee(Employee employee)
         {
             await _context.Employees.AddAsync(employee);
+            await SaveChangesBusiness();
         }
         public async Task<Employee?> FilterEmployeeByPin(string pin)
         {
