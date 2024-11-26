@@ -34,7 +34,6 @@ namespace Prova.MarQ.Infra.Service.Employee_Service
                 throw new InvalidOperationException("Employee pin must be less or equal than 4 characters!");
             }
             await _employeeLoader.AddEmployee(employee);
-            await _employeeLoader.SaveChangesBusiness();
         }
 
         public async Task DeleteEmployee(string employeePin, bool softDelete)
