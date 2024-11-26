@@ -104,6 +104,32 @@ namespace Prova.MarQ.Infra.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Prova.MarQ.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.HasIndex("UserName", "Role")
+                        .IsUnique();
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("Prova.MarQ.Domain.Entities.Clocking", b =>
                 {
                     b.HasOne("Prova.MarQ.Domain.Entities.Employee", "Employee")
@@ -116,7 +142,7 @@ namespace Prova.MarQ.Infra.Migrations
             modelBuilder.Entity("Prova.MarQ.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("Prova.MarQ.Domain.Entities.Company", "Company")
-                        .WithMany("Employees")
+                        .WithMany("Employee")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -126,7 +152,7 @@ namespace Prova.MarQ.Infra.Migrations
 
             modelBuilder.Entity("Prova.MarQ.Domain.Entities.Company", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Prova.MarQ.Domain.Entities.Employee", b =>
