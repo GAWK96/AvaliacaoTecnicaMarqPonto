@@ -57,11 +57,15 @@ This architecture ensures the application is maintainable, scalable, and easy to
 3) Development Highlights
 
 Technology Stack:
+
+BACKEND:
 • .NET 8
 
 • Entity Framework
 
 • LINQ
+
+• RestFUL API
 
 • SQLite (with Entity Framework)
 
