@@ -13,9 +13,12 @@ Complete CRUD for Company and Employee entities with:
 2) Reporting
 An endpoint to generate a work hours report with filters for:
 • Start Date (mandatory)
+
 • End Date (mandatory)
+
 • Document (optional)
-• The report includes:
+
+The report includes:
 • Date
 • Employee Name
 • Document
