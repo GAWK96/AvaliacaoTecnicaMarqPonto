@@ -18,6 +18,7 @@ Complete CRUD for Company and Employee entities with:
 • Detailed reporting of work hours and overtime.
 
 2) Reporting
+   
 An endpoint to generate a work hours report with filters for:
 • Start Date (mandatory)
 
