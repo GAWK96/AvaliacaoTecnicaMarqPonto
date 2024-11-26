@@ -10,6 +10,8 @@ public class ProvaMarqDbContext : DbContext
     public DbSet<Company> Companies { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Clocking> Clocking { get; set; }
+
+    public DbSet<User> User { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -33,6 +35,13 @@ public class ProvaMarqDbContext : DbContext
             .WithMany(e => e.Employee)
             .HasForeignKey(c => c.CompanyId);
 
+        modelBuilder.Entity<User>()
+        .HasIndex(u => u.UserName)
+        .IsUnique();
+
+        modelBuilder.Entity<User>()
+        .HasIndex(u => new { u.UserName, u.Role })
+        .IsUnique();
     }
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //{
