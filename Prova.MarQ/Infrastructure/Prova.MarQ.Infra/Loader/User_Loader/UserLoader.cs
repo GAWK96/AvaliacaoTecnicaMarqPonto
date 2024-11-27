@@ -47,5 +47,13 @@ namespace Prova.MarQ.Infra.Loader.User_Loader
                                 .FirstOrDefaultAsync();
             return getUserName;
         }
+
+        public User UserObjectGenerator(string userName, string password)
+        {
+            User user = new User();
+            user.UserName = userName;
+            user.Password = password;
+            return user;
+        }
     }
 }

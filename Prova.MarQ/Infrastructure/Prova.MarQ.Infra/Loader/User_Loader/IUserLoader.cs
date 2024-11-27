@@ -13,6 +13,7 @@ namespace Prova.MarQ.Infra.Loader.User_Loader
         Task AddUser(User user);
         Task<User?> GetUserByName(string userName);
         public string HashThePassword(User user);
-        public PasswordVerificationResult VerifyHashedPassword(User user, string password);
+        public PasswordVerificationResult VerifyHashedPassword(User user, string passwordUser);
+        public User UserObjectGenerator(string userName, string password);
     }
 }
