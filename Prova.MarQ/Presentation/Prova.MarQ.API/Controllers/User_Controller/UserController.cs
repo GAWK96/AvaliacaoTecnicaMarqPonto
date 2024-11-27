@@ -29,8 +29,8 @@ namespace Prova.MarQ.API.Controllers.User_Controller
         [HttpGet("Login")]
         public async Task<IActionResult> Login(string username, string password)
         {
-            await _userService.UserLogin(username, password);
-            return Ok("User logged successfully");
+            var token = await _userService.UserLogin(username, password);
+            return Ok(token);
         }
     }
 }
