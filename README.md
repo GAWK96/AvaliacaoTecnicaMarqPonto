@@ -65,11 +65,19 @@ BACKEND:
 
 • LINQ
 
+• JWT Authentication
+
 • RestFUL API
 
 • SQLite (with Entity Framework)
 
 • Clean architecture and object-oriented design principles.
+
+4) Authentication JWT 
+For secure authentication, the application implements JWT (JSON Web Token). This approach ensures that user sessions are stateless, providing scalability and security. The server issues a token upon successful login, which clients include in subsequent requests to access protected resources. The tokens are signed to prevent tampering, ensuring the integrity of the authentication mechanism.
+
+6) Hash Password 
+To enhance password security, the application uses the PasswordHasher library for password hashing. This ensures that user passwords are never stored in plain text, but instead as cryptographically hashed values. This library also applies salting and iterative hashing techniques, protecting against common vulnerabilities like brute-force attacks and rainbow table attacks.
 
 5) Best Practices:
 • Clear and readable code.
