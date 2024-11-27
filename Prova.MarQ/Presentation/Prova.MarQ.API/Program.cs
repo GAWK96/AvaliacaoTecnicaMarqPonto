@@ -12,6 +12,8 @@ using Prova.MarQ.Infra.Service.User_Service;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +45,19 @@ builder.Services.AddScoped<IClockingLoader, ClockingLoader>();
 builder.Services.AddScoped<IClockingService, ClockingService>();
 builder.Services.AddScoped<IUserLoader, UserLoader>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ProvaMarqDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddSingleton(provider =>
+{
+    // Retrieve values from configuration or use hardcoded values
+    var key = "YourSuperSecretKeyThatIsAtLeast32CharsLong!"; // Replace with a secure key
+    var issuer = "YourIssuer";
+    var audience = "YourAudience";
+
+    return new JwtTokenGenerator(key, issuer, audience);
+});
 
 var app = builder.Build();
 
