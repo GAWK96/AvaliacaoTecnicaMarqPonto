@@ -1,4 +1,5 @@
-﻿using Prova.MarQ.Domain.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using Prova.MarQ.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Prova.MarQ.Infra.Loader.User_Loader
     {
         Task AddUser(User user);
         Task<User?> GetUserByName(string userName);
+        public string HashThePassword(User user);
+        public PasswordVerificationResult VerifyHashedPassword(User user, string password);
     }
 }
