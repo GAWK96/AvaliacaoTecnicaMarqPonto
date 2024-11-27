@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Prova.MarQ.Domain.Entities;
 using Prova.MarQ.Infra.Loader.User_Loader;
 using System;
@@ -13,11 +14,13 @@ namespace Prova.MarQ.Infra.Service.User_Service
     {
         private readonly IUserLoader _userLoader;
         private readonly PasswordHasher<string> _passwordHasher;
+        private readonly JwtTokenGenerator _tokenGenerator;
 
-        public UserService(IUserLoader userLoader)
+        public UserService(IUserLoader userLoader, JwtTokenGenerator tokenGenerator)
         {
             _userLoader = userLoader;
             _passwordHasher = new PasswordHasher<string>();
+            _tokenGenerator = tokenGenerator;
         }
 
         public async Task AddUser(User user)
@@ -40,9 +43,10 @@ namespace Prova.MarQ.Infra.Service.User_Service
             return getUserName;
         }
 
-        public async Task<User?> UserLogin(string userName, string password)
+        public async Task<string> UserLogin(string userName, string password)
         {
             var getUser = await _userLoader.GetUserByName(userName);
+            string token = "Token empty";
             if (getUser == null)
             {
                 throw new InvalidOperationException("Invalid username or password.");
@@ -51,12 +55,14 @@ namespace Prova.MarQ.Infra.Service.User_Service
             if (verifyHashedPassword == PasswordVerificationResult.Success)
             {
                 Console.WriteLine("hash password matched!");
+                token = _tokenGenerator.GenerateToken(getUser, getUser.Role);
+                return token;
             }
             if (verifyHashedPassword != PasswordVerificationResult.Success || getUser == null)
-            {
-                throw new InvalidOperationException("User or login invalid!");
+            {   
+               throw new InvalidOperationException("User or login invalid!");
             }
-            return getUser;
+            return token;
         }
     }
 }

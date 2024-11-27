@@ -10,7 +10,7 @@ namespace Prova.MarQ.Infra.Service.User_Service
     public interface IUserService
     {
         Task AddUser(User user);
-        Task<User?> UserLogin(string userName, string password);
+        Task<string> UserLogin(string userName, string password);
         public Task<User?> GetUserByName(string userName);
 
     }
