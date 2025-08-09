@@ -83,23 +83,23 @@ namespace Prova.MarQ.Infra.Loader.Clocking_Loader
                           on t1.EmployeePin equals t2.EmployeePin
                           select new
                           {
-                              Date = t1.ClockIn.Date,
-                              EmployeeName = t2.EmployeeName,
-                              EmployeeDocument = t2.EmployeeDocument,
-                              ClockIn = t1.ClockIn,
-                              ClockOut = t1.ClockOut
+                              date = t1.ClockIn.Date,
+                              employeeName = t2.EmployeeName,
+                              employeeDocument = t2.EmployeeDocument,
+                              clockIn = t1.ClockIn,
+                              clockOut = t1.ClockOut
                           }).ToListAsync();
 
             var finalReport = result
                                .Select(x => new ClockingReport
                                      {
-                                         Date = x.Date,
-                                         EmployeeName = x.EmployeeName,
-                                         EmployeeDocument = x.EmployeeDocument,
-                                         ClockingsPerDay = x.ClockOut != null ? 2 : 1,
-                                         TotalWorked = CalculateTotalWorkedTime(x.ClockIn, x.ClockOut),
-                                         WeekDay = x.ClockIn.DayOfWeek,
-                                         Overtime = CalculateOvertime(CalculateTotalWorkedTime(x.ClockIn, x.ClockOut))
+                                         Date = x.date,
+                                         EmployeeName = x.employeeName,
+                                         EmployeeDocument = x.employeeDocument,
+                                         ClockingsPerDay = x.clockOut != null ? 2 : 1,
+                                         TotalWorked = CalculateTotalWorkedTime(x.clockIn, x.clockOut),
+                                         WeekDay = x.clockIn.DayOfWeek,
+                                         Overtime = CalculateOvertime(CalculateTotalWorkedTime(x.clockIn, x.clockOut))
                                }).ToList();
             return finalReport;
 
