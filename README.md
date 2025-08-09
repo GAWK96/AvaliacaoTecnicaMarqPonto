@@ -1,90 +1,79 @@
+# Technical Challenge: API Development with .NET 8 and SQLite
+
 This project is a technical challenge that involves extending an API developed in .NET 8 with a SQLite database. The API utilizes a layered architecture pattern consisting of Controller, Service, and Repository (Loader) layers, which promote clear separation of concerns and scalability.
 
-The challenge includes working with two main entities: Company and Employee, which have a 1:N relationship. The implemented solution adheres to the best practices of clean architecture and object-oriented programming, providing both mandatory and optional features.
-1) CRUD Operations:
+## Challenge Overview
 
-Complete CRUD for Company and Employee entities with:
+The challenge includes working with two main entities: **Company** and **Employee**, which have a **1:N** relationship. The implemented solution adheres to the best practices of clean architecture and object-oriented programming, providing both mandatory and optional features.
 
-• Validation to prevent duplicate entries for Document fields.
+### 1. CRUD Operations
 
-• Name field length restricted to a maximum of 100 characters.
+Complete CRUD operations for **Company** and **Employee** entities with the following features:
 
-• Soft delete (logical deletion) for maintaining data integrity.
+- **Validation** to prevent duplicate entries for Document fields.
+- **Name field length** restricted to a maximum of 100 characters.
+- **Soft delete (logical deletion)** for maintaining data integrity.
+- A **unique 4-character PIN** is assigned to each employee upon registration.
+- Endpoint for **clocking in/out** using an employee's PIN.
+- **Detailed reporting** of work hours and overtime.
 
-• A unique 4-character PIN is assigned to each employee upon registration.
+### 2. Reporting
 
-• Endpoint for clocking in/out using an employee's PIN.
-
-• Detailed reporting of work hours and overtime.
-
-2) Reporting
-   
 An endpoint to generate a work hours report with filters for:
-• Start Date (mandatory)
 
-• End Date (mandatory)
-
-• Document (optional)
+- **Start Date** (mandatory)
+- **End Date** (mandatory)
+- **Document** (optional)
 
 The report includes:
 
-• Date
+- Date
+- Employee Name
+- Document
+- Daily Punch Count
+- Total Hours Worked
+- Overtime Hours
+- Day of the Week
 
-• Employee Name
+Overtime is calculated as hours worked beyond **8 hours/day**.
 
-• Document
+### 3. Layered Architecture Pattern
 
-• Daily Punch Count
+The project follows the **Layered Architecture Pattern**, separating responsibilities into three layers:
 
-• Total Hours Worked
-
-• Overtime Hours
-
-• Day of the Week
-
-• Overtime calculated as hours worked beyond 8 hours/day.
-
-The project follows the Layered Architecture Pattern, separating responsibilities into three layers:
-
-• Controller: Handles API requests and responses.
-
-• Service: Contains the service layer for processing logic.
-
-• Loader: Includes the repository for database interactions.
+- **Controller**: Handles API requests and responses.
+- **Service**: Contains the service layer for processing logic.
+- **Loader (Repository)**: Includes the repository for database interactions.
 
 This architecture ensures the application is maintainable, scalable, and easy to extend.
 
-3) Development Highlights
+### 4. Development Highlights
 
-Technology Stack:
+**Technology Stack:**
 
-BACKEND:
-• .NET 8
+#### Backend:
+- **.NET 8**
+- **Entity Framework**
+- **LINQ**
+- **JWT Authentication**
+- **RestFUL API**
+- **SQLite** (with Entity Framework)
+- **Clean architecture and object-oriented design principles**
 
-• Entity Framework
+#### Authentication (JWT):
 
-• LINQ
+For secure authentication, the application implements **JWT** (JSON Web Token). This approach ensures that user sessions are stateless, providing scalability and security. The server issues a token upon successful login, which clients include in subsequent requests to access protected resources. The tokens are signed to prevent tampering, ensuring the integrity of the authentication mechanism.
 
-• JWT Authentication
+#### Password Hashing:
 
-• RestFUL API
+To enhance password security, the application uses the **PasswordHasher** library for password hashing. This ensures that user passwords are never stored in plain text, but instead as cryptographically hashed values. This library also applies salting and iterative hashing techniques, protecting against common vulnerabilities like brute-force attacks and rainbow table attacks.
 
-• SQLite (with Entity Framework)
+### 5. Best Practices
 
-• Clean architecture and object-oriented design principles.
+- **Clear and readable code**: The codebase is designed to be easy to understand and maintain.
+- **Adherence to software design patterns**: The project follows the **Repository pattern** for data access and separation of concerns.
+- **Focus on functionality and reliability**: The application is built to be reliable, with proper validation and reporting features to meet the business requirements.
 
-4) Authentication JWT
-   
-For secure authentication, the application implements JWT (JSON Web Token). This approach ensures that user sessions are stateless, providing scalability and security. The server issues a token upon successful login, which clients include in subsequent requests to access protected resources. The tokens are signed to prevent tampering, ensuring the integrity of the authentication mechanism.
+---
 
-5) Hash Password
-   
-To enhance password security, the application uses the PasswordHasher library for password hashing. This ensures that user passwords are never stored in plain text, but instead as cryptographically hashed values. This library also applies salting and iterative hashing techniques, protecting against common vulnerabilities like brute-force attacks and rainbow table attacks.
-
-6) Best Practices
-   
-• Clear and readable code.
-
-• Adherence to software design patterns (Repository pattern).
-
-• Focus on functionality and reliability.
+By using this approach, the application is scalable, maintainable, and secure, ensuring it can handle future extensions and evolving business needs effectively.
