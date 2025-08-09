@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Prova.MarQ.Domain.Entities;
 using Prova.MarQ.Infra.Service.Employee_Service;
 using Prova.MarQ.Infra.Service.User_Service;
 
 namespace Prova.MarQ.API.Controllers.User_Controller
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UserController : ControllerBase, IUserController
     {
         private readonly IUserService _userService;
@@ -20,6 +23,7 @@ namespace Prova.MarQ.API.Controllers.User_Controller
             return Ok("User added successfully!");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetUserByName")]
         public async Task<IActionResult> GetUserByName(string name)
         {
