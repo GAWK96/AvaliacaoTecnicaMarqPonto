@@ -29,6 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Application\Application.csproj" />
 		<ProjectReference Include="..\..\Business\Prova.MarQ.Domain\Prova.MarQ.Domain.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\Prova.MarQ.Infra\Prova.MarQ.Infra.csproj" />
 	</ItemGroup>
